@@ -50,7 +50,10 @@ def post_find_user_geocodes():
             geocoded_addresses.append(geocode_result[0]['geometry']['location'])
         else:
             geocoded_addresses.append({"error": "Unable to geocode address", "address": address})
-    response = requests.post(url, json=data)
+    
+    # This will throw errors because of url
+    # response = requests.post(url, json=data)
+
     return jsonify(geocoded_addresses), 200
 
     # Extracting the 'addresses' and 'preferences' from the JSON payload
