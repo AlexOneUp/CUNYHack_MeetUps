@@ -6,6 +6,7 @@ import json
 import requests
 import os
 from flask_cors import CORS
+from mongo import create_user, auth_user
 
 from helpers.geocode_converter import find_user_geocodes
 
@@ -44,6 +45,30 @@ def get_best_location():
     # Access the addresses and preferences from the JSON data
     print(data, geocoded_addresses)
     return jsonify({"message": "Best location found."})
+
+
+@app.route("/signup", methods=["POST"])
+def signup():
+    data = request.get_json()
+
+    name = data.get("name", [])
+    password = data.get("password", [])
+    create_user(name, password)
+    return jsonify({"message": "User authenticated"})
+
+
+@app.route("/login", methods=["GET"])
+def login():
+    data = request.get_json()
+
+    name = data.get("name", [])
+    password = data.get("password", [])
+    resp = auth_user(name, password)
+    if resp:
+        resp["password"] = password
+        return jsonify({"message": "User authenticated", "user": resp})
+    else:
+        return jsonify({"message": "Username or Password is incorrect."})
 
 
 if __name__ == "__main__":

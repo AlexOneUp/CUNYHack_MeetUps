@@ -83,6 +83,8 @@
 			dependencies = (
 			);
 			name = HangNYC;
+			packageProductDependencies = (
+			);
 			productName = HangNYC;
 			productReference = F414318A2B801D1F0070BBD3 /* HangNYC.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +113,8 @@
 				Base,
 			);
 			mainGroup = F41431812B801D1F0070BBD3;
+			packageReferences = (
+			);
 			productRefGroup = F414318B2B801D1F0070BBD3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
