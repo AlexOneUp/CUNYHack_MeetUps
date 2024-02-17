@@ -1,0 +1,5 @@
+flask
+flask-cors
+googlemaps
+python-dotenv
+pymongo[srv]
