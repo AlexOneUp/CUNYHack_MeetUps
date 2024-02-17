@@ -1,11 +1,16 @@
 from flask import Flask, jsonify, request
+
 from dotenv import load_dotenv
 import googlemaps
 import json
 import requests
 import os
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
+
 
 # Google Maps API Key
 gmaps = googlemaps.Client(key=os.getenv('googlemapsAPIKey'))
@@ -14,13 +19,15 @@ gmaps = googlemaps.Client(key=os.getenv('googlemapsAPIKey'))
 def home():
     return "Hello, this is the Flask backend for your SwiftUI app!"
 
-@app.route('/data', methods=['GET'])
+
+@app.route("/data", methods=["GET"])
 def get_data():
     # Here you can fetch and return data
     data = {
         "message": "This is some data from the Flask backend."
         }
     return jsonify(data)
+
 
 
 # This route will receive a POST request with a JSON body of Geocoding data
@@ -52,7 +59,19 @@ def post_find_user_geocodes():
     # Here you can add processing logic based on the received addresses and preferences
     # Calculate the mid point of the addresses and return the location
     
-    
 
-if __name__ == '__main__':
+
+@app.route("/get-best-location", methods=["POST"])
+def get_best_location():
+    # TODO: Implement the logic to get the best location
+    data = request.get_json()
+
+    # Access the addresses and preferences from the JSON data
+    addresses = data.get("addresses", [])
+    preferences = data.get("preferences", [])
+    print(data, addresses, preferences)
+    return jsonify({"message": "Best location found."})
+
+
+if __name__ == "__main__":
     app.run(debug=True)
