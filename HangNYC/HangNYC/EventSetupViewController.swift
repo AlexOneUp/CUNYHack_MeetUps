@@ -9,15 +9,36 @@ import UIKit
 
 class EventSetupViewController: UIViewController {
     
-    @IBOutlet weak var getBestLocationBtn: UIButton!
+//    @IBOutlet weak var getBestLocationBtn: UIButton!
+    let testButton = UIButton()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        testTapped()
+        view.backgroundColor = .systemBackground
     }
     
-    @IBAction func getBestLocationTapped(_ sender: Any) {
+    func testTapped(){
+        view.addSubview(testButton)
+        testButton.configuration = .filled()
+        testButton.configuration?.baseBackgroundColor = .systemGreen
+        testButton.configuration?.title = "Test Button"
+        
+        testButton.translatesAutoresizingMaskIntoConstraints = false // must do this for every UI element
+        
+        testButton.addTarget(self, action: #selector(getBestLocationTapped), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            testButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            testButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            testButton.widthAnchor.constraint(equalToConstant: 200),
+            testButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+    @IBAction func getBestLocationTapped() {
         let addresses = ["address1", "address2", "address3"]
         let preferences = [String]()
 
