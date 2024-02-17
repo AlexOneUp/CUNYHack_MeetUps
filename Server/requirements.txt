@@ -3,3 +3,5 @@ flask-cors
 googlemaps
 python-dotenv
 pymongo[srv]
+bcrypt
+uuid
