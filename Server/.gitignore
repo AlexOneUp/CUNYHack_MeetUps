@@ -9,5 +9,6 @@ build/
 *.perspectivev3
 
 */xcuserdata/
-.env
+
 *__pycache__/
+.env
