@@ -9,3 +9,6 @@ build/
 *.perspectivev3
 
 */xcuserdata/
+
+/Server/__pycache__/
+.env
