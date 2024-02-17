@@ -18,6 +18,14 @@ class WelcomeViewController: UIViewController {
         test.text = "hello world"
     }
 
-
+    @IBAction func testTapped(_ sender: Any) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let eventSetup = storyBoard.instantiateViewController(withIdentifier: "eventSetup") as! EventSetupViewController
+        
+        let navigationController = UINavigationController(rootViewController: eventSetup)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
 }
 

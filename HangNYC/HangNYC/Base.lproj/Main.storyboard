@@ -22,6 +22,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QkU-Ad-1qi">
+                                <rect key="frame" x="165" y="397" width="54" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="test"/>
+                                <connections>
+                                    <action selector="testTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oTT-ph-xfc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -42,21 +51,25 @@
         <!--Event Setup View Controller-->
         <scene sceneID="4sG-0C-SQl">
             <objects>
-                <viewController id="YEK-kn-8yj" customClass="EventSetupViewController" customModule="HangNYC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="eventSetup" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YEK-kn-8yj" customClass="EventSetupViewController" customModule="HangNYC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YJU-Sy-SEl">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQP-NR-gPp">
-                                <rect key="frame" x="117" y="676" width="160" height="35"/>
+                                <rect key="frame" x="116" y="680" width="160" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Get Best Location"/>
+                                <connections>
+                                    <action selector="getBestLocationTapped:" destination="YEK-kn-8yj" eventType="touchUpInside" id="ULZ-d7-Tgz"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TqK-EL-a5x"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="b2R-vX-UFC"/>
                     <connections>
                         <outlet property="getBestLocationBtn" destination="FQP-NR-gPp" id="vct-uO-uSR"/>
                     </connections>
