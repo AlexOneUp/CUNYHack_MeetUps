@@ -10,8 +10,9 @@ build/
 
 */xcuserdata/
 
+
+*__pycache__/
 .env
 HangNYC/HangNYC.xcodeproj/project.xcworkspace/xcuserdata
 HangNYC/HangNYC.xcodeproj/project.xcworkspace/xcshareddata
-Server/__pycache__/
 HangNYC/HangNYC.xcodeproj/xcuserdata

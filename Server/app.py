@@ -1,20 +1,18 @@
 from flask import Flask, jsonify, request
 
 from dotenv import load_dotenv
-import googlemaps
+
 import json
 import requests
 import os
 from flask_cors import CORS
 from mongo import create_user, auth_user
 
+from helpers.geocode_converter import find_user_geocodes
+
 
 app = Flask(__name__)
 CORS(app)
-
-
-# Google Maps API Key
-gmaps = googlemaps.Client(key=os.getenv('googlemapsAPIKey'))
 
 @app.route('/')
 def home():
@@ -31,46 +29,21 @@ def get_data():
 
 
 
-# This route will receive a POST request with a JSON body of Geocoding data
+
+# Here you can add processing logic based on the received addresses and preferences
 # Algorithm will figure out the mid point of the number of users and return the location
-
-@app.route('/post_find_user_geocodes', methods=['POST'])
-def post_find_user_geocodes():
-    data = request.json
-
-    addresses = data.get('addresses', [])
-    if not addresses:
-        return jsonify({"error": "No addresses provided"}), 400
-
-    geocoded_addresses = []
-
-    for address in addresses:
-        # Geocoding an address
-        geocode_result = gmaps.geocode(address)
-        if geocode_result:
-            geocoded_addresses.append(geocode_result[0]['geometry']['location'])
-        else:
-            geocoded_addresses.append({"error": "Unable to geocode address", "address": address})
-    response = requests.post(url, json=data)
-    return jsonify(geocoded_addresses), 200
-
-    # Extracting the 'addresses' and 'preferences' from the JSON payload
-
-
-    # Here you can add processing logic based on the received addresses and preferences
-    # Calculate the mid point of the addresses and return the location
-    
-
-
-@app.route("/get-best-location", methods=["POST"])
+@app.route("/get_best_location", methods=["POST"])
 def get_best_location():
     # TODO: Implement the logic to get the best location
-    data = request.get_json()
+
+    data = request.json
+
+    # Extracting the 'addresses' from the JSON payload
+    # Put into helper function to find the geocodes of users addresses
+    geocoded_addresses = find_user_geocodes(data)
 
     # Access the addresses and preferences from the JSON data
-    addresses = data.get("addresses", [])
-    preferences = data.get("preferences", [])
-    print(data, addresses, preferences)
+    print(data, geocoded_addresses)
     return jsonify({"message": "Best location found."})
 
 
