@@ -222,10 +222,13 @@ class EventSetupViewController: UIViewController {
         ])
     }
     
-    @objc func goToNextScreen(){
-        let nextScreen = EventSuggestionsViewController()
-        nextScreen.title = "Event Suggestions"
-        navigationController?.pushViewController(nextScreen, animated: true)
+    @objc func goToNextScreen(data: String){
+        DispatchQueue.main.async {
+            let nextScreen = EventSuggestionsViewController()
+            nextScreen.title = "Event Suggestions"
+            nextScreen.jsonString = data
+            self.navigationController?.pushViewController(nextScreen, animated: true)
+        }
     }
     
     @IBAction func getBestLocationTapped() {
@@ -283,14 +286,13 @@ class EventSetupViewController: UIViewController {
             if httpResponse.statusCode == 200 {
                 if let data = data {
                     // Handle the response data
-                    print("Response: \(String(data: data, encoding: .utf8) ?? "")")
+                    self.goToNextScreen(data: String(data: data, encoding: .utf8) ?? "")
                 }
             } else {
                 print("HTTP Response Code: \(httpResponse.statusCode)")
             }
         }
         
-        goToNextScreen();
         
         task.resume()
     }

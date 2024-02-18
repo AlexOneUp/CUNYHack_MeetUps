@@ -38,6 +38,8 @@ def get_best_location():
     data = request.json
     addresses = data.get("addresses", [])
     modes = data.get("modes", [])
+    modes = [mode.lower() for mode in data.get("modes", [])]
+
     if not addresses:
         return jsonify({"error": "No addresses provided"}), 400
 

@@ -67,60 +67,14 @@ class EventSuggestionsViewController: UIViewController {
     var midpoint = Location()
     var businessArray: [Business] = []
     
+    var jsonString: String = ""
+    
     let colors: [UIColor] = [.red, .green, .blue, .yellow, .orange]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-//        Below goes the JSON data
-                let jsonString = """
-        {
-            "businesses": [
-                {
-                    "address": "201 E 45th St, New York",
-                    "commuteTimes": [3103, 3034, 1921],
-                    "location": {"lat": 40.7526741, "lng": -73.9726943},
-                    "name": "NY Express Halal Food",
-                    "price_level": "N/A",
-                    "rating": 4.9
-                },
-                {
-                    "address": "235 E 53rd St, Manhattan",
-                    "commuteTimes": [3063, 2580, 2119],
-                    "location": {"lat": 40.7573049, "lng": -73.9679238},
-                    "name": "Café Luce Italian Restaurant",
-                    "price_level": 2,
-                    "rating": 4.7
-                },
-                {
-                    "address": "89 E 42nd St Grand Central Station Lower Level Dining Concourse, New York",
-                    "commuteTimes": [3217, 2547, 1621],
-                    "location": {"lat": 40.7523458, "lng": -73.9773368},
-                    "name": "Tartinery Café - Bar | Grand Central",
-                    "price_level": 2,
-                    "rating": 4.7
-                },
-                {
-                    "address": "211 E 46th St, New York",
-                    "commuteTimes": [3064, 2996, 1792],
-                    "location": {"lat": 40.7532168, "lng": -73.9718218},
-                    "name": "Barnea Bistro",
-                    "price_level": "N/A",
-                    "rating": 4.7
-                },
-                {
-                    "address": "212 E 52nd St 2nd fl, New York",
-                    "commuteTimes": [2929, 2602, 1947],
-                    "location": {"lat": 40.7566056, "lng": -73.9693108},
-                    "name": "Bar Orai",
-                    "price_level": "N/A",
-                    "rating": 4.6
-                }
-            ],
-            "midpoint": {"lat": 40.75446268550891, "lng": -73.97245366411904}
-        }
-        """
         
         // Convert JSON string to data
         guard let jsonData = jsonString.data(using: .utf8) else {
