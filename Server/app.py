@@ -9,6 +9,7 @@ from flask_cors import CORS
 from mongo import create_user, auth_user
 
 from helpers.geocode_converter import find_user_geocodes
+from helpers.midpoint import getBestMidpoint
 
 
 app = Flask(__name__)
@@ -34,13 +35,14 @@ def get_best_location():
     # TODO: Implement the logic to get the best location
 
     data = request.json
+    addresses = data.get("addresses", [])
+    modes = data.get("modes", [])
+    if not addresses:
+        return jsonify({"error": "No addresses provided"}), 400
 
-    # Extracting the 'addresses' from the JSON payload
-    # Put into helper function to find the geocodes of users addresses
-    geocoded_addresses = find_user_geocodes(data)
+    geocoded_addresses = find_user_geocodes(addresses)
+    best_midpoint = getBestMidpoint(geocoded_addresses, modes)
 
-    # Access the addresses and preferences from the JSON data
-    print(data, geocoded_addresses)
     return jsonify({"message": "Best location found."})
 
 
@@ -61,10 +63,9 @@ def login():
     username = data.get("username", [])
     password = data.get("password", [])
     resp = auth_user(username, password)
-    print(resp)
+
     if resp:
         resp["password"] = password
-        print("success")
         return jsonify({"message": "User authenticated", "user": resp})
     else:
         return jsonify({"message": "Username or Password is incorrect."})
