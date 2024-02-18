@@ -31,6 +31,7 @@ def create_user(name, password):
 
 
 def auth_user(name, password):
+    print(name, password)
     user = userCollection.find_one({"name": name})
 
     if user:

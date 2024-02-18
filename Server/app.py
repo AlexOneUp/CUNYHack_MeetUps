@@ -14,7 +14,8 @@ from helpers.geocode_converter import find_user_geocodes
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/')
+
+@app.route("/")
 def home():
     return "Hello, this is the Flask backend for your SwiftUI app!"
 
@@ -22,12 +23,8 @@ def home():
 @app.route("/data", methods=["GET"])
 def get_data():
     # Here you can fetch and return data
-    data = {
-        "message": "This is some data from the Flask backend."
-        }
+    data = {"message": "This is some data from the Flask backend."}
     return jsonify(data)
-
-
 
 
 # Here you can add processing logic based on the received addresses and preferences
@@ -51,21 +48,23 @@ def get_best_location():
 def signup():
     data = request.get_json()
 
-    name = data.get("name", [])
+    username = data.get("username", [])
     password = data.get("password", [])
-    create_user(name, password)
-    return jsonify({"message": "User authenticated"})
+    create_user(username, password)
+    return jsonify({"message": "User created successfully"})
 
 
-@app.route("/login", methods=["GET"])
+@app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
 
-    name = data.get("name", [])
+    username = data.get("username", [])
     password = data.get("password", [])
-    resp = auth_user(name, password)
+    resp = auth_user(username, password)
+    print(resp)
     if resp:
         resp["password"] = password
+        print("success")
         return jsonify({"message": "User authenticated", "user": resp})
     else:
         return jsonify({"message": "Username or Password is incorrect."})
