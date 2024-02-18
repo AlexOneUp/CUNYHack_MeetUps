@@ -13,6 +13,9 @@
 		F414319A2B801D210070BBD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F41431982B801D210070BBD3 /* LaunchScreen.storyboard */; };
 		F41431A22B8034190070BBD3 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41431A12B8034190070BBD3 /* WelcomeViewController.swift */; };
 		F41431A42B8035390070BBD3 /* EventSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41431A32B8035390070BBD3 /* EventSetupViewController.swift */; };
+		F41431AB2B8177260070BBD3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41431AA2B8177260070BBD3 /* LoginViewController.swift */; };
+		F41431AD2B817E450070BBD3 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41431AC2B817E440070BBD3 /* UITextField+Extensions.swift */; };
+		F41431AF2B8189040070BBD3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41431AE2B8189040070BBD3 /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		F414319B2B801D210070BBD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F41431A12B8034190070BBD3 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		F41431A32B8035390070BBD3 /* EventSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSetupViewController.swift; sourceTree = "<group>"; };
+		F41431AA2B8177260070BBD3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F41431AC2B817E440070BBD3 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
+		F41431AE2B8189040070BBD3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,9 @@
 			children = (
 				F414318D2B801D1F0070BBD3 /* AppDelegate.swift */,
 				F414318F2B801D1F0070BBD3 /* SceneDelegate.swift */,
+				F41431AA2B8177260070BBD3 /* LoginViewController.swift */,
+				F41431AE2B8189040070BBD3 /* SignUpViewController.swift */,
+				F41431AC2B817E440070BBD3 /* UITextField+Extensions.swift */,
 				F41431A12B8034190070BBD3 /* WelcomeViewController.swift */,
 				F41431A32B8035390070BBD3 /* EventSetupViewController.swift */,
 				F41431962B801D210070BBD3 /* Assets.xcassets */,
@@ -142,8 +151,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F41431A22B8034190070BBD3 /* WelcomeViewController.swift in Sources */,
+				F41431AF2B8189040070BBD3 /* SignUpViewController.swift in Sources */,
 				F414318E2B801D1F0070BBD3 /* AppDelegate.swift in Sources */,
 				F41431902B801D1F0070BBD3 /* SceneDelegate.swift in Sources */,
+				F41431AD2B817E450070BBD3 /* UITextField+Extensions.swift in Sources */,
+				F41431AB2B8177260070BBD3 /* LoginViewController.swift in Sources */,
 				F41431A42B8035390070BBD3 /* EventSetupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
