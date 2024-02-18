@@ -10,6 +10,7 @@ from mongo import create_user, auth_user
 
 from helpers.geocode_converter import find_user_geocodes
 from helpers.midpoint import getBestMidpoint
+from helpers.getBusinesses import getBusinesses
 
 
 app = Flask(__name__)
@@ -42,8 +43,9 @@ def get_best_location():
 
     geocoded_addresses = find_user_geocodes(addresses)
     best_midpoint = getBestMidpoint(geocoded_addresses, modes)
+    businesses = getBusinesses(geocoded_addresses, best_midpoint, modes)
 
-    return jsonify({"message": "Best location found."})
+    return jsonify({"businesses": businesses})
 
 
 @app.route("/signup", methods=["POST"])

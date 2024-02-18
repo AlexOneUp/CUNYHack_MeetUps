@@ -9,11 +9,8 @@ gmaps = googlemaps.Client(key=os.getenv("googlemapsAPIKey"))
 
 
 def getBestMidpoint(geocodes, modes):
-    # find midpoint
     midpoint = find_midpoint(geocodes)
-    bestPoint = getBetterPoint(midpoint, geocodes, modes, 99999999)
-    print("best", bestPoint)
-    return geocodes[0]
+    return getBetterPoint(midpoint, geocodes, modes, 99999999)
 
 
 def find_midpoint(geocodes):
