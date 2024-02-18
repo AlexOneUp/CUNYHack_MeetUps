@@ -1,4 +1,5 @@
 import os
+import ssl
 import pymongo
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -9,7 +10,7 @@ load_dotenv()
 MONGO_PASS = os.environ["MONGO_PASS"]
 
 cluster = MongoClient(
-    f"mongodb+srv://goats:{MONGO_PASS}@hangnyc.arbldh3.mongodb.net/?retryWrites=true&w=majority"
+    f"mongodb+srv://goats:{MONGO_PASS}@hangnyc.arbldh3.mongodb.net/?retryWrites=true&w=majority",
 )
 
 db = cluster["HangNYC"]
