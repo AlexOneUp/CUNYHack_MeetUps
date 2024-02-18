@@ -1,5 +1,3 @@
-# CUNYHack_MeetUps
-CUNYHack 2024 
 <div>
     <h1  align="center" >CUNYHack Meet Ups</h1>
 </div>
