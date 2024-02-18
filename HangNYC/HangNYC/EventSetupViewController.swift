@@ -46,7 +46,7 @@ class EventSetupViewController: UIViewController {
     }
     
     func makePostRequest(addresses: [String], preferences: [String]) {
-        guard let url = URL(string: "http://127.0.0.1:5000/get-best-location") else {
+        guard let url = URL(string: "http://127.0.0.1:5000/get_best_location") else {
             print("Invalid URL")
             return
         }
