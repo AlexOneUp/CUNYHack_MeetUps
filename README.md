@@ -1,8 +1,6 @@
 <div>
-    <h1  align="center" >HangNYC</h1>
+    <h1  align="center" >Our Purpose?</h1>
 </div>
-
-## Our Purpose?
 
 <p align="center">
 Imagine planning a meet-up with friends, but without the usual stress of finding a fair meeting point. 
