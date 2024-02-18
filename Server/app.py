@@ -45,7 +45,7 @@ def get_best_location():
     best_midpoint = getBestMidpoint(geocoded_addresses, modes)
     businesses = getBusinesses(geocoded_addresses, best_midpoint, modes)
 
-    return jsonify({"businesses": businesses})
+    return jsonify({"midpoint": best_midpoint, "businesses": businesses})
 
 
 @app.route("/signup", methods=["POST"])
