@@ -107,6 +107,8 @@ class EventSuggestionsViewController: UIViewController {
         view.addSubview(mapView)
         setMapConstraints(mapView: mapView)
         
+        let business1 = UILabel()
+        
 //        Create radius
         let circleCenter : CLLocationCoordinate2D  = CLLocationCoordinate2DMake(midpoint.lat, midpoint.lng);
         let circ = GMSCircle(position: circleCenter, radius: 0.56 * 1609.34)
@@ -135,10 +137,10 @@ class EventSuggestionsViewController: UIViewController {
     func setMapConstraints(mapView: UIView) {
         mapView.translatesAutoresizingMaskIntoConstraints = false // must do this for every UI element
         mapView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        mapView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-        mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        mapView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+        mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+        mapView.heightAnchor.constraint(equalToConstant: 500).isActive = true
         mapView.widthAnchor.constraint(equalToConstant: 200).isActive = true
     }
 }
