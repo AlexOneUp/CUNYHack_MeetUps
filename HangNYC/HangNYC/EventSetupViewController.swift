@@ -225,7 +225,6 @@ class EventSetupViewController: UIViewController {
     @objc func goToNextScreen(data: String){
         DispatchQueue.main.async {
             let nextScreen = EventSuggestionsViewController()
-            nextScreen.title = "Event Suggestions"
             nextScreen.jsonString = data
             self.navigationController?.pushViewController(nextScreen, animated: true)
         }
