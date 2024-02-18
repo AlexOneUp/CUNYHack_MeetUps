@@ -16,19 +16,44 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-        // Do any additional setup after loading the view.
-//        test.text = "hello world"
+        
+        // Background Image + Padding to it
+        let padding: CGFloat = 20
+        let backgroundImage = UIImageView(
+            frame:
+                CGRect(
+                    x: padding,
+                    y: 250,
+                    width: UIScreen.main.bounds.width - 2 * padding,
+                    height: UIScreen.main.bounds.height * 0.25
+                )
+        )
+                backgroundImage.image = UIImage(named: "welcome_bg_img")
+                backgroundImage.contentMode = .scaleAspectFill
+                
+                // Add the image view to the view hierarchy
+                view.addSubview(backgroundImage)
+        // Makes edges rounder
+        backgroundImage.layer.cornerRadius = 20
+        backgroundImage.clipsToBounds = true
+        
         testTapped()
         view.backgroundColor = .systemBackground
         title = "Welcome"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
-
+    
+//    func buttonBackground() {
+//        testTapped()
+//        
+//        
+//    }
+//    
     func testTapped() {
         view.addSubview(testButton)
         testButton.configuration = .filled()
         testButton.configuration?.baseBackgroundColor = .systemGreen
-        testButton.configuration?.title = "Test"
+        testButton.configuration?.title = "Create Event"
         
         testButton.translatesAutoresizingMaskIntoConstraints = false // must do this for every UI element
         
