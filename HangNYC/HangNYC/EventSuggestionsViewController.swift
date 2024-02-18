@@ -67,6 +67,8 @@ class EventSuggestionsViewController: UIViewController {
     var midpoint = Location()
     var businessArray: [Business] = []
     
+    let stackView = UIStackView()
+    
     var jsonString: String = ""
     
     let colors: [UIColor] = [.red, .green, .blue, .yellow, .orange]
@@ -107,7 +109,7 @@ class EventSuggestionsViewController: UIViewController {
         view.addSubview(mapView)
         setMapConstraints(mapView: mapView)
         
-        let business1 = UILabel()
+//        let business1 = UILabel()
         
 //        Create radius
         let circleCenter : CLLocationCoordinate2D  = CLLocationCoordinate2DMake(midpoint.lat, midpoint.lng);
@@ -123,6 +125,23 @@ class EventSuggestionsViewController: UIViewController {
             setUpMarker(title: business.name, address: business.address, lat: business.location.lat, lng: business.location.lng, rating: business.rating, map: mapView, colorIndex: counter)
             counter += 1
         }
+        
+        configureStackView(map: mapView)
+    }
+    
+    func configureStackView(map: UIView){
+        view.addSubview(stackView)
+        setStackViewConstraintsTwo(map: map)
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 15
+        stackView.backgroundColor = .white
+        stackView.layoutMargins = .init(top: 8, left: 8, bottom: 4, right: 8)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        
+        for business in businessArray {
+            makeBusinessRowSubView(title: business.name, address: business.address, rating: business.rating)
+        }
     }
     
     func setUpMarker(title: String, address: String, lat: Double, lng: Double, rating: Double, map: GMSMapView, colorIndex: Int){
@@ -134,10 +153,66 @@ class EventSuggestionsViewController: UIViewController {
         marker.map = map
     }
     
+    func makeBusinessRowSubView(title: String, address: String, rating: Double){
+        let businessStackView = UIStackView()
+        businessStackView.axis = .horizontal
+        businessStackView.spacing = 10
+        businessStackView.distribution = .fillProportionally
+        businessStackView.layoutMargins = .init(top: 10, left: 16, bottom: 10, right: 16)
+        businessStackView.isLayoutMarginsRelativeArrangement = true
+        businessStackView.backgroundColor = .systemGray4
+        businessStackView.cornerRadius = 10
+        
+        let iconStackView = UIStackView()
+        iconStackView.axis = .horizontal
+        iconStackView.spacing = 2
+//        let markerIcon = UIImage(systemName: "mappin.circle.fill")
+////        markerIcon. = .init(width: 10, height: 10)
+//        let markerImageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 10, height: 10)))
+//        markerImageView.image = markerIcon
+        let markerText = UILabel()
+        markerText.text = title
+        markerText.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        markerText.textColor = .black
+//        iconStackView.addArrangedSubview(markerImageView)
+        iconStackView.addArrangedSubview(markerText)
+        
+        businessStackView.addArrangedSubview(iconStackView)
+        
+        let addressUIView = UILabel()
+        addressUIView.text = address
+        addressUIView.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        addressUIView.textColor = .systemGray
+        
+        businessStackView.addArrangedSubview(addressUIView)
+        
+        stackView.addArrangedSubview(businessStackView)
+        setBusinessRowConstraints(view: businessStackView)
+    }
+    
+    func setBusinessRowConstraints(view: UIView){
+        view.translatesAutoresizingMaskIntoConstraints = false // must do this for every UI element
+
+        view.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 10).isActive = true
+        view.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -10).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    func setStackViewConstraintsTwo(map: UIView) {
+        stackView.translatesAutoresizingMaskIntoConstraints = false // must do this for every UI element
+        stackView.topAnchor.constraint(equalTo: map.bottomAnchor, constant: 0).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+//        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+    }
+    
     func setMapConstraints(mapView: UIView) {
         mapView.translatesAutoresizingMaskIntoConstraints = false // must do this for every UI element
-        mapView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        mapView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+//        mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
         mapView.heightAnchor.constraint(equalToConstant: 500).isActive = true
