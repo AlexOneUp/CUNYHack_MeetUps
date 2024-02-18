@@ -84,7 +84,9 @@ class EventSetupViewController: UIViewController {
         submitButton.translatesAutoresizingMaskIntoConstraints = false // must do this for every UI element
         submitButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10).isActive = true
         submitButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        submitButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        submitButton.widthAnchor.constraint(equalToConstant: 175).isActive = true
+        submitButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        submitButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     func configureStackView(){
@@ -162,6 +164,7 @@ class EventSetupViewController: UIViewController {
             inputName.placeholder = "Name"
             inputName.layer.borderWidth = 1.0
             inputName.layer.borderColor = UIColor.gray.cgColor
+            inputName.setLeftPaddingPoints(10)
             setInputsContraints(input: inputName)
             
             memberNameStackView.addArrangedSubview(inputName)
@@ -169,12 +172,14 @@ class EventSetupViewController: UIViewController {
             inputLocation.placeholder = "Address"
             inputLocation.layer.borderWidth = 1.0
             inputLocation.layer.borderColor = UIColor.gray.cgColor
+            inputLocation.setLeftPaddingPoints(10)
             memberLocationStackView.addArrangedSubview(inputLocation)
             setInputsContraints(input: inputLocation)
             
             inputTransport.layer.borderWidth = 1.0
             inputTransport.layer.borderColor = UIColor.gray.cgColor
             inputTransport.placeholder = "Transport Mode"
+            inputTransport.setLeftPaddingPoints(10)
             memberTransportStackView.addArrangedSubview(inputTransport)
             setInputsContraints(input: inputTransport)
         }
@@ -201,8 +206,7 @@ class EventSetupViewController: UIViewController {
         view.addSubview(testButton)
         testButton.configuration = .filled()
         testButton.configuration?.baseBackgroundColor = .systemGreen
-        testButton.configuration?.title = "Test Button"
-        
+        testButton.configuration?.title = "Calculate Best Location"
         testButton.translatesAutoresizingMaskIntoConstraints = false // must do this for every UI element
         
         testButton.addTarget(self, action: #selector(getBestLocationTapped), for: .touchUpInside)
@@ -210,20 +214,31 @@ class EventSetupViewController: UIViewController {
         NSLayoutConstraint.activate([
             testButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             testButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            testButton.widthAnchor.constraint(equalToConstant: 200),
+            testButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            testButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+//            testButton.widthAnchor.constraint(equalToConstant: 200),
             testButton.heightAnchor.constraint(equalToConstant: 50),
 //            testButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20)
         ])
     }
     
     @IBAction func getBestLocationTapped() {
-        let addresses = ["address1", "address2", "address3"]
-        let preferences = [String]()
+        if members.count < 3 {
+            return
+        }
+        
+        var addresses: [String] = []
+        var transportation_modes: [String] = []
+        
+        for person in members {
+            addresses.append(person.location)
+            transportation_modes.append(person.transport)
+        }
 
-        makePostRequest(addresses: addresses, preferences: preferences)
+        makePostRequest(addresses: addresses, transportations: transportation_modes)
     }
     
-    func makePostRequest(addresses: [String], preferences: [String]) {
+    func makePostRequest(addresses: [String], transportations: [String]) {
         guard let url = URL(string: "http://127.0.0.1:5000/get_best_location") else {
             print("Invalid URL")
             return
@@ -234,8 +249,10 @@ class EventSetupViewController: UIViewController {
 
         let postData: [String: Any] = [
             "addresses": addresses,
-            "preferences": preferences
+            "transports": transportations
         ]
+        
+        print(postData)
 
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: postData, options: [])
