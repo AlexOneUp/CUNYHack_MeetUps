@@ -235,10 +235,10 @@ class EventSetupViewController: UIViewController {
             transportation_modes.append(person.transport)
         }
 
-        makePostRequest(addresses: addresses, transportations: transportation_modes)
+        makePostRequest(addresses: addresses, modes: transportation_modes)
     }
     
-    func makePostRequest(addresses: [String], transportations: [String]) {
+    func makePostRequest(addresses: [String], modes: [String]) {
         guard let url = URL(string: "http://127.0.0.1:5000/get_best_location") else {
             print("Invalid URL")
             return
@@ -249,7 +249,7 @@ class EventSetupViewController: UIViewController {
 
         let postData: [String: Any] = [
             "addresses": addresses,
-            "transports": transportations
+            "modes": modes
         ]
         
         print(postData)
