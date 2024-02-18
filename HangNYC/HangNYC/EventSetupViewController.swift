@@ -222,6 +222,12 @@ class EventSetupViewController: UIViewController {
         ])
     }
     
+    @objc func goToNextScreen(){
+        let nextScreen = EventSuggestionsViewController()
+        nextScreen.title = "Event Suggestions"
+        navigationController?.pushViewController(nextScreen, animated: true)
+    }
+    
     @IBAction func getBestLocationTapped() {
         if members.count < 3 {
             return
@@ -283,7 +289,9 @@ class EventSetupViewController: UIViewController {
                 print("HTTP Response Code: \(httpResponse.statusCode)")
             }
         }
-
+        
+        goToNextScreen();
+        
         task.resume()
     }
     
